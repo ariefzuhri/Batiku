@@ -25,7 +25,7 @@ export default class Register extends Component {
     }
 
     handleSubmit(event) {
-        axios.post('http://127.0.0.1:8000/api/register',{
+        axios.post('https://batikservice.herokuapp.com/api/register',{
             email: this.state.email,
             password: this.state.password,
             name: this.state.name,

@@ -22,7 +22,7 @@ export default class Login extends Component {
     }
 
     handleSubmit(event) {
-        axios.post('http://127.0.0.1:8000/api/login',{
+        axios.post('https://batikservice.herokuapp.com/api/login',{
             email: this.state.email,
             password: this.state.password,
         }).then(function (res){
