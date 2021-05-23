@@ -1,5 +1,7 @@
 import axios from 'axios';
+import { Carousel } from 'bootstrap';
 import React, { Component } from 'react'
+import { Card,  Col, Container, Jumbotron, Row } from 'react-bootstrap';
 import { Redirect } from 'react-router-dom'
 
 export default class Dashboard extends Component {
@@ -32,17 +34,27 @@ export default class Dashboard extends Component {
 
         return(
             <div>
-                <h1>Batik Interface</h1>
-                {this.state.list.map((dinamis, key) => {
-                    return(
-                    <div key={dinamis.id}>
-                        <h1>{dinamis.nama}</h1>
-                        <p>{dinamis.asal}</p>
-                        <p>{dinamis.makna}</p>
-                        <img key={dinamis.foto} src={dinamis.foto}/>
-                    </div>
-                    )
-                })}
+                
+                <Jumbotron>
+                    <Container>
+                    <h1>Macam Batik Indonesia</h1>
+                        <Row>
+                            {this.state.list.map((dinamis, key) => {
+                                return(
+                                        <Col lg={3}>
+                                            <Card key={dinamis.id}>
+                                                <Card.Img key={dinamis.foto} style={{width: '100%'}} src={dinamis.foto}/>
+                                                <Card.Body>
+                                                    <Card.Title>{dinamis.nama}</Card.Title>
+                                                    <Card.Subtitle className="mb-2 text-muted" > Asal : {dinamis.asal}</Card.Subtitle>
+                                                    <Card.Text>{dinamis.makna}</Card.Text>
+                                                </Card.Body>
+                                            </Card>
+                                        </Col>)
+                                    })}
+                        </Row>
+                    </Container>
+                </Jumbotron>
             </div>
         )
     }
