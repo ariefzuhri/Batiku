@@ -8,6 +8,7 @@ import Dashboard from './pages/Dashboard'
 import Logout from './pages/Logout'
 import Add from './pages/Add'
 import Edit from './pages/Edit'
+import Delete from './pages/Delete'
 import { Navbar, Nav, NavDropdown } from 'react-bootstrap'
 
 // Buat ambil token setelah login => localStorage.getItem('token')
@@ -24,7 +25,8 @@ function App() {
               <Nav.Link href='/register'>Register</Nav.Link>
               <Nav.Link href='/logout'>Logout</Nav.Link>
               <Nav.Link href='/add'>Tambah</Nav.Link>
-              <Link className="nav-link" to={{pathname: '/edit', state: 10}}>Edit</Link>
+              <Link className="nav-link" to={{pathname: '/edit', state: 17}}>Edit</Link>
+              <Link className="nav-link" to={{pathname: '/edit', state: 17}}>Hapus</Link>
             </Nav>
           </Navbar.Collapse>
       </Navbar>
@@ -35,6 +37,7 @@ function App() {
         <Route path="/logout" component={Logout} />
         <Route path="/add" component={Add} />
         <Route path="/edit" component={Edit} />
+        <Route path="/delete" component={Delete} />
         <Route component={NotFound} />
       </Switch>
     </Router>
