@@ -25,13 +25,14 @@ export default class Register extends Component {
     }
 
     handleSubmit(event) {
-        axios.post('https://batikservice.herokuapp.com/api/register',{
+        const url = 'https://batikservice.herokuapp.com/api/register';
+        axios.post(url,{
             email: this.state.email,
             password: this.state.password,
             name: this.state.name,
         }).then(function (res){
             console.log(res)
-            localStorage.setItem('token', res.data.access);
+            localStorage.setItem('token', res.data.token);
             localStorage.setItem('user', res.config.data);
         }).catch(function (err){
             console.log(err)

@@ -10,6 +10,8 @@ export default class Dashboard extends Component {
         return (
             <div>
                 {localStorage.getItem('user')}
+                <br></br>
+                {localStorage.getItem('token')}
             </div>
         )
     }
