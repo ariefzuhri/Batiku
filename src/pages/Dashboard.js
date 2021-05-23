@@ -1,8 +1,9 @@
 import axios from 'axios';
-import { Carousel } from 'bootstrap';
 import React, { Component } from 'react'
 import { Card,  Col, Container, Jumbotron, Row } from 'react-bootstrap';
 import { Redirect } from 'react-router-dom'
+import CarouselContainer from '../Component/CarouselContainer';
+import '../App.css';
 
 export default class Dashboard extends Component {
 
@@ -34,10 +35,10 @@ export default class Dashboard extends Component {
 
         return(
             <div>
-                
                 <Jumbotron>
+                <CarouselContainer/>
                     <Container>
-                    <h1>Macam Batik Indonesia</h1>
+                    <h1>Macam Batik Indonesia</h1><br></br>
                         <Row>
                             {this.state.list.map((dinamis, key) => {
                                 return(
