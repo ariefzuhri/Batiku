@@ -15,9 +15,12 @@ export default class Edit extends Component {
             foto: '',
             token: localStorage.getItem('token'),
             success: false,
+            idNotFound: false,
+            isDelete: false,
         };
         this.onChange = this.onChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleDelete = this.handleDelete.bind(this);
         this.getBatikById(this.state.id);
     }
 
@@ -27,14 +30,15 @@ export default class Edit extends Component {
             params: {
                 token: this.state.token,
             },
-        }).then((res) => {
+        }).then(res => {
             console.log(res)
             this.setState({ nama: res.data.nama });
             this.setState({ asal: res.data.asal });
             this.setState({ makna: res.data.makna });
             this.setState({ foto: res.data.foto });
-        }).catch(function (err){
-            console.log(err)
+        }).catch(err => {
+            console.log(err);
+            this.setState({ idNotFound: true });
         })
     }
 
@@ -65,18 +69,9 @@ export default class Edit extends Component {
         event.preventDefault();
     }
 
-    deleteBatik = (id) => {
-        const url = 'https://batikservice.herokuapp.com/api/batiks/' + id;
-        axios.delete(url,{
-            params: {
-                token: this.state.token,
-            },
-        }).then((res) => {
-            console.log(res)
-            this.setState({ success: res.data.success });
-        }).catch(function (err){
-            console.log(err)
-        })
+    handleDelete(event) {
+        this.setState({ isDelete: true })
+        event.preventDefault();
     }
 
     render() {
@@ -84,8 +79,12 @@ export default class Edit extends Component {
             return <Redirect to='login'/>
         }
 
-        if (this.state.success){
+        if (this.state.success || this.state.id == null || this.state.idNotFound){
             return <Redirect to=''/>
+        }
+
+        if (this.state.isDelete) {
+            return <Redirect to={{pathname: '/delete', state: this.state.id}}/>
         }
         
         return (
@@ -110,7 +109,7 @@ export default class Edit extends Component {
                     <Button variant="primary" type="submit" onClick={this.handleSubmit}>
                         Simpan
                     </Button>
-                    <Button variant="danger" type="submit" onClick={this.deleteBatik(this.state.id)}>
+                    <Button variant="danger" type="submit" onClick={this.handleDelete}>
                         Hapus
                     </Button>
                 </Form>
