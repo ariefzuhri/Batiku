@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { Component } from 'react'
-
+import { Redirect } from 'react-router-dom'
 
 export default class Dashboard extends Component {
 
@@ -8,18 +8,28 @@ export default class Dashboard extends Component {
         super();
         this.state = {
             list:[], 
-            token: localStorage.getItem('token')}
+            token: localStorage.getItem('token')
+        }
+        console.log(localStorage.getItem('token'));
     }
-    componentWillUnmount(){
-        this.setState({token : localStorage.getItem('token')})
-        const url= 'https://batikservice.herokuapp.com/api/batiks?token='+this.state.token;
-        axios.get(url)
-        .then( data  => {
+
+    componentWillMount(){
+        const url= 'https://batikservice.herokuapp.com/api/batiks';
+        axios.get(url, {
+            params: {
+                token: this.state.token,
+            },
+        }).then( data  => {
             console.log(data.data);
-            this.setState ({list :  data.data})
+            this.setState ({list: data.data})
         })
     }
+
     render() {
+        if(!localStorage.getItem('token')){
+            return <Redirect to='login'/>
+        }
+
         return(
             <div>
                 <h1>Batik Interface</h1>
@@ -35,6 +45,5 @@ export default class Dashboard extends Component {
                 })}
             </div>
         )
-     
     }
 }
