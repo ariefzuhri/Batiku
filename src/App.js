@@ -25,8 +25,6 @@ function App() {
               <Nav.Link href='/register'>Register</Nav.Link>
               <Nav.Link href='/logout'>Logout</Nav.Link>
               <Nav.Link href='/add'>Tambah</Nav.Link>
-              <Link className="nav-link" to={{pathname: '/edit', state: 17}}>Edit</Link>
-              <Link className="nav-link" to={{pathname: '/edit', state: 17}}>Hapus</Link>
             </Nav>
           </Navbar.Collapse>
       </Navbar>

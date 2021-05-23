@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { Component } from 'react'
-import { Card,  Col, Container, Jumbotron, Row } from 'react-bootstrap';
+import { Button, Card,  Col, Container, Jumbotron, Row } from 'react-bootstrap';
 import { Redirect } from 'react-router-dom'
 import CarouselContainer from '../Component/CarouselContainer';
 import '../App.css';
@@ -11,7 +11,8 @@ export default class Dashboard extends Component {
         super();
         this.state = {
             list:[], 
-            token: localStorage.getItem('token')
+            token: localStorage.getItem('token'),
+            idEdit: null,
         }
         console.log(localStorage.getItem('token'));
     }
@@ -25,12 +26,24 @@ export default class Dashboard extends Component {
         }).then( data  => {
             console.log(data.data);
             this.setState ({list: data.data})
+        }).catch(function (err){
+            console.log(err)
+            console.log(err.response)
         })
+    }
+
+    editBatik = (id) => {
+        this.setState({ idEdit: id });
+        console.log(id);
     }
 
     render() {
         if(!localStorage.getItem('token')){
             return <Redirect to='login'/>
+        }
+
+        if(this.state.idEdit != null){
+            return <Redirect to={{pathname: '/edit', state: this.state.idEdit}}/>
         }
 
         return(
@@ -49,6 +62,9 @@ export default class Dashboard extends Component {
                                                     <Card.Title>{dinamis.nama}</Card.Title>
                                                     <Card.Subtitle className="mb-2 text-muted" > Asal : {dinamis.asal}</Card.Subtitle>
                                                     <Card.Text>{dinamis.makna}</Card.Text>
+                                                    <Button variant="primary" onClick={() => this.editBatik(dinamis.id)}>
+                                                        Edit
+                                                    </Button>
                                                 </Card.Body>
                                             </Card>
                                         </Col>)

@@ -42,6 +42,7 @@ export default class Add extends Component {
             this.setState({ success: res.data.success });
         }).catch(function (err){
             console.log(err)
+            console.log(err.response)
         })
         event.preventDefault();
     }

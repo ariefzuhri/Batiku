@@ -36,6 +36,7 @@ export default class Login extends Component {
             this.setState({ success: res.data.success })
         }).catch(function (err){
             console.log(err)
+            console.log(err.response)
         })
         event.preventDefault();
     }

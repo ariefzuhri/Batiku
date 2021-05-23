@@ -25,6 +25,7 @@ export default class Edit extends Component {
     }
 
     getBatikById = (id) => {
+        console.log(id);
         const url = 'https://batikservice.herokuapp.com/api/batiks/' + id;
         axios.get(url,{
             params: {
@@ -38,6 +39,7 @@ export default class Edit extends Component {
             this.setState({ foto: res.data.foto });
         }).catch(err => {
             console.log(err);
+            console.log(err.response)
             this.setState({ idNotFound: true });
         })
     }
@@ -65,6 +67,7 @@ export default class Edit extends Component {
             this.setState({ success: res.data.success });
         }).catch(function (err){
             console.log(err)
+            console.log(err.response)
         })
         event.preventDefault();
     }

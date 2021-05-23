@@ -26,6 +26,9 @@ class Logout extends Component{
         }).then(data => {
             console.log(data);
             this.setState({ success: data.data.success });
+        }).catch(function (err){
+            console.log(err)
+            console.log(err.response)
         })
     }
 

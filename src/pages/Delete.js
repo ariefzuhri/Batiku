@@ -26,6 +26,7 @@ export default class Delete extends Component {
             this.setState({ success: res.data.success });
         }).catch(err => {
             console.log(err)
+            console.log(err.response)
             this.setState({ idNotFound: true });
         })
     }
