@@ -10,6 +10,7 @@ class Logout extends Component{
             token: localStorage.getItem('token'),
             success: false,
         }
+        localStorage.clear();
     }
 
     componentWillMount(){
@@ -23,14 +24,13 @@ class Logout extends Component{
                 token: this.state.token
             },
         }).then(data => {
-            console.log(data)
-            this.setState({ success: data.data.success })
+            console.log(data);
+            this.setState({ success: data.data.success });
         })
     }
 
     render(){
         if (this.state.success){
-            localStorage.clear();
             return <Redirect to=''/>
         } else {
             return (

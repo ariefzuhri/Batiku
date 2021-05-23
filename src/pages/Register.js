@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Form, Button, Container } from 'react-bootstrap'
+import  { Redirect } from 'react-router-dom'
 const axios = require('axios')
 
 export default class Register extends Component {
@@ -10,6 +11,7 @@ export default class Register extends Component {
             name: '',
             email: '',
             password: '',
+            success: false,
         };
         this.onChange = this.onChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -30,10 +32,11 @@ export default class Register extends Component {
             email: this.state.email,
             password: this.state.password,
             name: this.state.name,
-        }).then(function (res){
+        }).then(res => {
             console.log(res)
             localStorage.setItem('token', res.data.token);
             localStorage.setItem('user', res.config.data);
+            this.setState({ success: res.data.success })
         }).catch(function (err){
             console.log(err)
         })
@@ -41,6 +44,10 @@ export default class Register extends Component {
     }
 
     render() {
+        if (localStorage.getItem('token') || this.state.success){
+            return <Redirect to=''/>
+        }
+
         return (
             <Container style={{ marginTop: '100px' }}>
                 <Form>
