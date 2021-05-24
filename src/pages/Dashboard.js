@@ -57,7 +57,7 @@ export default class Dashboard extends Component {
                                 return(
                                         <Col lg={3}>
                                             <Card key={dinamis.id}>
-                                                <Card.Img key={dinamis.foto} style={{width: '100%'}} src={dinamis.foto}/>
+                                                <Card.Img key={dinamis.foto} style={{width: '100%'}, {height:'180px'}} src={dinamis.foto}/>
                                                 <Card.Body>
                                                     <Card.Title>{dinamis.nama}</Card.Title>
                                                     <Card.Subtitle className="mb-2 text-muted" > Asal : {dinamis.asal}</Card.Subtitle>
